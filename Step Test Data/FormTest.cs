@@ -18,7 +18,8 @@ namespace Step_Test_Data
         bool sexOK = false;
         bool stepOK = false;
         string text_results = "";
-        List<int> Xvalues = new List<int>();
+        Utils utils = new Utils();
+        private enum numberInLetter { first,second,third,fourth,fifth }
 
 
         public FormTest(CurrentTest data)
@@ -53,8 +54,8 @@ namespace Step_Test_Data
                 int index = ((Int32.Parse(Data_Step.Remove(0, 1)) - 15) / 5);
                 combo_stephight.Text = 15.ToString();
                 stepOK = true;
-                updateXList();
             }
+
         }
 
         private void FormTest_Load(object sender, EventArgs e)
@@ -91,7 +92,8 @@ namespace Step_Test_Data
                 lbl_indication.Show();
                 txt_result.Show();
                 btn_validate.Show();
-                updateResults();
+                lbl_indication.Text = "The participant do the first test";
+                lbl_nxtresult.Text = "Result of the first test (bpm) : ";
             }
             else
             {
@@ -117,6 +119,8 @@ namespace Step_Test_Data
                 Data.maxHR = 220 - age;
                 Data._85maxHR = (double)Data.maxHR * (double)0.85;
                 Data._50maxHR = (double)Data.maxHR * (double)0.5;
+                var text = "Max HR  : " + Data.maxHR.ToString() + " b/min \n\n85% MaxHR : " + Data._85maxHR.ToString() + " b/min \n\n";
+                RelnitResultText(text);
                 checkIfComplete();
             }
             else
@@ -173,123 +177,63 @@ namespace Step_Test_Data
             switch ((StepOfTheTest)Data.stepOfTheTest)
             {
                 case StepOfTheTest.init:
-                    text_results = "";
-                    text_results += "Max HR  : " + Data.maxHR.ToString() + " b/min \n\n";
-                    text_results += "85% MaxHR : " + Data._85maxHR.ToString() + " b/min \n\n";
-                    lbl_indication.Text = "The participant do the first test";
-                    lbl_nxtresult.Text = "Result of the first test (bpm) : ";
                     break;
                 case StepOfTheTest.HR1:
-                    text_results += "First HR mesured : " + Data.HR1.ToString();
-                    if (Data.HR1 < Data._50maxHR)
-                    {
-
-                        text_results += "(This HR will not be taken into acount because it is to low) \n\n";
-                        lbl_indication.Text = "The participant do the second test";
-                        lbl_nxtresult.Text = "Result of the second test (bpm) : ";
-                    }
-                    else if (Data.HR1 > Data._85maxHR)
-                    {
-                        text_results += "(This HR will not be taken into acount because it is to high) \n\n";
-                        testIsFinished();
-                    }
-                    else
-                    {
-                        text_results += "\n\n";
-                        lbl_indication.Text = "The participant do the second test";
-                        lbl_nxtresult.Text = "Result of the second test (bpm) : ";
-                        Data.takenHr.Add(Data.HR1);
-                        Data.takenX.Add(Xvalues[0]);
-                    }
+                    PopulateTextBox(Data.HR1,0);
                     break;
                 case StepOfTheTest.HR2:
-                    text_results += "Second HR mesured : " + Data.HR2.ToString();
-                    if (Data.HR2 < Data._50maxHR)
-                    {
-                        text_results += "(This HR will not be taken into acount because it is to low) \n\n";
-                        lbl_indication.Text = "The participant do the third test";
-                        lbl_nxtresult.Text = "Result of the third test (bpm) : ";
-                    }
-                    else if (Data.HR2 > Data._85maxHR)
-                    {
-                        text_results += "(This HR will not be taken into acount because it is to high) \n\n";
-                        testIsFinished();
-                    }
-                    else
-                    {
-                        text_results += "\n\n";
-                        lbl_indication.Text = "The participant do the third test";
-                        lbl_nxtresult.Text = "Result of the third test (bpm) : ";
-                        Data.takenHr.Add(Data.HR2);
-                        Data.takenX.Add(Xvalues[1]);
-                    }
+                    PopulateTextBox(Data.HR2, 1);
                     break;
                 case StepOfTheTest.HR3:
-                    text_results += "Third HR mesured : " + Data.HR3.ToString();
-                    if (Data.HR3 < Data._50maxHR)
-                    {
-                        text_results += "(This HR will not be taken into acount because it is to low) \n\n";
-                        lbl_indication.Text = "The participant do the fourth test";
-                        lbl_nxtresult.Text = "Result of the fourth test (bpm) : ";
-                    }
-                    else if (Data.HR3 > Data._85maxHR)
-                    {
-                        text_results += "(This HR will not be taken into acount because it is to high) \n\n";
-                        testIsFinished();
-                    }
-                    else
-                    {
-                        text_results += "\n\n";
-                        lbl_indication.Text = "The participant do the fourth test";
-                        lbl_nxtresult.Text = "Result of the fourth test (bpm) : ";
-                        Data.takenHr.Add(Data.HR3);
-                        Data.takenX.Add(Xvalues[2]);
-                    }
+                    PopulateTextBox(Data.HR3, 2);
                     break;
                 case StepOfTheTest.HR4:
-                    text_results += "Fourth HR mesured : " + Data.HR4.ToString();
-                    if (Data.HR4 < Data._50maxHR)
-                    {
-                        text_results += "(This HR will not be taken into acount because it is to low) \n\n";
-                        lbl_indication.Text = "The participant do the fifth test";
-                        lbl_nxtresult.Text = "Result of the fifth test (bpm) : ";
-                    }
-                    else if (Data.HR4 > Data._85maxHR)
-                    {
-                        text_results += "(This HR will not be taken into acount because it is to high) \n\n";
-                        testIsFinished();
-                    }
-                    else
-                    {
-                        text_results += "\n\n";
-                        lbl_indication.Text = "The participant do the fifth test";
-                        lbl_nxtresult.Text = "Result of the fifth test (bpm) : ";
-                        Data.takenHr.Add(Data.HR4);
-                        Data.takenX.Add(Xvalues[3]);
-                    }
+                    PopulateTextBox(Data.HR4, 3);
                     break;
                 case StepOfTheTest.finish:
                     text_results += "Fourth HR mesured : " + Data.HR5.ToString();
                     if (Data.HR5 < Data._50maxHR)
                     {
-                        text_results += "(This HR will not be taken into acount because it is to low) \n\n";
+                         updateResultText("(This HR will not be taken into acount because it is to low) \n\n");
                     }
                     else if (Data.HR5 > Data._85maxHR)
                     {
-                        text_results += "(This HR will not be taken into acount because it is to high) \n\n";
+                        updateResultText("(This HR will not be taken into acount because it is to high) \n\n");
                     }
                     else
                     {
-                        text_results += "\n\n";
+                        updateResultText("\n\n");
                         Data.takenHr.Add(Data.HR5);
-                        Data.takenX.Add(Xvalues[4]);
+                        Data.takenX.Add(Data.Xvalues[4]);
                     }
                     testIsFinished();
                     break;
-
             }
+        }
 
-            lbl_results.Text = text_results;
+        private void PopulateTextBox(int hr,int number)
+        {
+            updateResultText($"{(numberInLetter)number} HR mesured : {hr.ToString()}");
+            if (hr < Data._50maxHR)
+            {
+
+                updateResultText("(This HR will not be taken into acount because it is to low) \n\n");
+                lbl_indication.Text = $"The participant do the {(numberInLetter)(number+1)} test";
+                lbl_nxtresult.Text = $"Result of the {(numberInLetter)(number + 1)} test (bpm) : ";
+            }
+            else if (hr > Data._85maxHR)
+            {
+                updateResultText("(This HR will not be taken into acount because it is to high) \n\n");
+                testIsFinished();
+            }
+            else
+            {
+                updateResultText("\n\n");
+                lbl_indication.Text = $"The participant do the {(numberInLetter)(number + 1)} test";
+                lbl_nxtresult.Text = $"Result of the {(numberInLetter)(number + 1)} test (bpm) : ";
+                Data.takenHr.Add(hr);
+                Data.takenX.Add(Data.Xvalues[number]);
+            }
         }
 
         private void testIsFinished()
@@ -309,9 +253,9 @@ namespace Step_Test_Data
                         coeficient.Add((Data.takenHr[a] - Data.takenHr[i]) / (Data.takenX[a] - Data.takenX[i]));
                     }
                 }
-                double average_coefficient = calcAverage(coeficient);
-                double averageX = calcAverage(Data.takenX);
-                double averageY = calcAverage(Data.takenHr);
+                double average_coefficient = utils.calcAverage(coeficient);
+                double averageX = utils.calcAverage(Data.takenX);
+                double averageY = utils.calcAverage(Data.takenHr);
                 double origin = averageY - averageX * average_coefficient;
                 double aerobic_capacity = (Data.maxHR - origin) / average_coefficient;
                 lbl_indication.Text += "\n\nYour aerobic capacity is " + aerobic_capacity;
@@ -327,26 +271,6 @@ namespace Step_Test_Data
 
         }
 
-        private double calcAverage(List<double> list)
-        {
-            int sum = 0;
-            foreach (int val in list)
-            {
-                sum += val;
-            }
-            return sum / list.Count;
-        }
-
-        private double calcAverage(List<int> list)
-        {
-            int sum = 0;
-            foreach (int val in list)
-            {
-                sum += val;
-            }
-            return sum / list.Count;
-        }
-
         private void btn_validate_Click(object sender, EventArgs e)
         {
             int HR;
@@ -354,16 +278,16 @@ namespace Step_Test_Data
             result = Int32.TryParse(txt_result.Text, out HR);
             if (result)
             {
-                
+                lbl_result_error.Hide();
                 switch ((StepOfTheTest)Data.stepOfTheTest)
                 {
                     case StepOfTheTest.init:
-                        lbl_result_error.Hide();
-                        updateXList();
+                        utils.updateXList(Data);
                         Data.stepOfTheTest = (StepOfTheTest)1;
                         Data.HR1 = HR;
                         combo_stephight.Hide();
                         lbl_stephigh.Text += Data.TestStepHigh.ToString().Remove(0, 1);
+                        txt_Age.Enabled = false;
                         break;
                     case StepOfTheTest.HR1:
                         Data.stepOfTheTest = (StepOfTheTest)2;
@@ -391,24 +315,16 @@ namespace Step_Test_Data
                 lbl_result_error.Show();
             }
         }
-
-        private void updateXList()
+        
+        private void updateResultText(string Text)
         {
-            switch (Data.TestStepHigh)
-            {
-                case StepHigh._15:
-                    Xvalues.AddRange(new[] { 11, 14, 18, 21, 25 }.ToList());
-                    break;
-                case StepHigh._20:
-                    Xvalues.AddRange(new[] { 12, 17, 21, 25, 29 }.ToList());
-                    break;
-                case StepHigh._25:
-                    Xvalues.AddRange(new[] { 14, 19, 24, 28, 33 }.ToList());
-                    break;
-                case StepHigh._30:
-                    Xvalues.AddRange(new[] { 16, 21, 27, 32, 37 }.ToList());
-                    break;
-            }
+            Data.result_text = Data.result_text + Text;
+            lbl_results.Text = Data.result_text;
+        }
+        private void RelnitResultText(string Text)
+        {
+            Data.result_text = Text;
+            lbl_results.Text = Data.result_text;
         }
     }
 }

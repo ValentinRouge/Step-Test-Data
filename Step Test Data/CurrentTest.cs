@@ -24,6 +24,10 @@ namespace Step_Test_Data
         public List<int> takenHr { get; set; } = new List<int>();
         public List<int> takenX { get; set; } = new List<int>();
         public StepOfTheTest stepOfTheTest { get; set; } = StepOfTheTest.init;
+        public string result_text { get; set; }
+
+        public List<int> Xvalues = new List<int>();
+
     }
 
     public enum StepHigh
