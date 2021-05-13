@@ -43,6 +43,8 @@ namespace Step_Test_Data
             this.lbl_indication = new System.Windows.Forms.Label();
             this.lbl_nxtresult = new System.Windows.Forms.Label();
             this.txt_result = new System.Windows.Forms.TextBox();
+            this.lbl_age_error = new System.Windows.Forms.Label();
+            this.lbl_step_error = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lbl_Name
@@ -119,7 +121,6 @@ namespace Step_Test_Data
             this.combo_stephight.Name = "combo_stephight";
             this.combo_stephight.Size = new System.Drawing.Size(143, 24);
             this.combo_stephight.TabIndex = 7;
-            this.combo_stephight.SelectedIndexChanged += new System.EventHandler(this.combo_stephight_SelectedIndexChanged);
             this.combo_stephight.TextChanged += new System.EventHandler(this.combo_stephight_TextChanged);
             // 
             // lbl_stephigh
@@ -167,11 +168,33 @@ namespace Step_Test_Data
             this.txt_result.Size = new System.Drawing.Size(100, 22);
             this.txt_result.TabIndex = 13;
             // 
+            // lbl_age_error
+            // 
+            this.lbl_age_error.AutoSize = true;
+            this.lbl_age_error.ForeColor = System.Drawing.Color.Red;
+            this.lbl_age_error.Location = new System.Drawing.Point(296, 52);
+            this.lbl_age_error.Name = "lbl_age_error";
+            this.lbl_age_error.Size = new System.Drawing.Size(128, 17);
+            this.lbl_age_error.TabIndex = 14;
+            this.lbl_age_error.Text = "Type a correct age";
+            // 
+            // lbl_step_error
+            // 
+            this.lbl_step_error.AutoSize = true;
+            this.lbl_step_error.ForeColor = System.Drawing.Color.Red;
+            this.lbl_step_error.Location = new System.Drawing.Point(136, 106);
+            this.lbl_step_error.Name = "lbl_step_error";
+            this.lbl_step_error.Size = new System.Drawing.Size(153, 17);
+            this.lbl_step_error.TabIndex = 15;
+            this.lbl_step_error.Text = "Enter a value of the list";
+            // 
             // FormTest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.lbl_step_error);
+            this.Controls.Add(this.lbl_age_error);
             this.Controls.Add(this.txt_result);
             this.Controls.Add(this.lbl_nxtresult);
             this.Controls.Add(this.lbl_indication);
@@ -208,5 +231,7 @@ namespace Step_Test_Data
         private System.Windows.Forms.Label lbl_indication;
         private System.Windows.Forms.Label lbl_nxtresult;
         private System.Windows.Forms.TextBox txt_result;
+        private System.Windows.Forms.Label lbl_age_error;
+        private System.Windows.Forms.Label lbl_step_error;
     }
 }

@@ -33,6 +33,8 @@ namespace Step_Test_Data
             this.button2 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.btn_newEmptyTest = new System.Windows.Forms.Button();
+            this.lst_current_Test = new System.Windows.Forms.ListBox();
+            this.btn_open_current = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -69,7 +71,7 @@ namespace Step_Test_Data
             // btn_newEmptyTest
             // 
             this.btn_newEmptyTest.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_newEmptyTest.Location = new System.Drawing.Point(523, 206);
+            this.btn_newEmptyTest.Location = new System.Drawing.Point(523, 246);
             this.btn_newEmptyTest.Name = "btn_newEmptyTest";
             this.btn_newEmptyTest.Size = new System.Drawing.Size(176, 100);
             this.btn_newEmptyTest.TabIndex = 3;
@@ -77,11 +79,32 @@ namespace Step_Test_Data
             this.btn_newEmptyTest.UseVisualStyleBackColor = true;
             this.btn_newEmptyTest.Click += new System.EventHandler(this.btn_newEmptyTest_Click);
             // 
+            // lst_current_Test
+            // 
+            this.lst_current_Test.FormattingEnabled = true;
+            this.lst_current_Test.ItemHeight = 16;
+            this.lst_current_Test.Location = new System.Drawing.Point(523, 103);
+            this.lst_current_Test.Name = "lst_current_Test";
+            this.lst_current_Test.Size = new System.Drawing.Size(176, 84);
+            this.lst_current_Test.TabIndex = 5;
+            // 
+            // btn_open_current
+            // 
+            this.btn_open_current.Location = new System.Drawing.Point(523, 206);
+            this.btn_open_current.Name = "btn_open_current";
+            this.btn_open_current.Size = new System.Drawing.Size(176, 23);
+            this.btn_open_current.TabIndex = 6;
+            this.btn_open_current.Text = "Open selected test";
+            this.btn_open_current.UseVisualStyleBackColor = true;
+            this.btn_open_current.Click += new System.EventHandler(this.btn_open_current_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btn_open_current);
+            this.Controls.Add(this.lst_current_Test);
             this.Controls.Add(this.btn_newEmptyTest);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button2);
@@ -100,6 +123,8 @@ namespace Step_Test_Data
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btn_newEmptyTest;
+        private System.Windows.Forms.ListBox lst_current_Test;
+        private System.Windows.Forms.Button btn_open_current;
     }
 }
 

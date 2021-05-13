@@ -11,6 +11,8 @@ namespace Step_Test_Data
         public string Name { get; set;  }
         public int Age { get; set;  }
         public bool isFemale { get; set; }
+        public bool isMale { get; set; }
+
         public StepHigh TestStepHigh { get; set; }
         public int HR1 { get; set; }
         public int HR2 { get; set; }

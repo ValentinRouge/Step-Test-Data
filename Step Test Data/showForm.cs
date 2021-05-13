@@ -60,7 +60,7 @@ namespace Step_Test_Data
         private void GRIDVIEW_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             
-            cellID = Convert.ToInt32(GRIDVIEW_DisplayTest.Rows[e.RowIndex].Cells[0].Value.ToString())-1;
+            cellID = Convert.ToInt32(GRIDVIEW_DisplayTest.Rows[e.RowIndex].Cells[0].Value.ToString());
         }
     }
 }

@@ -19,6 +19,17 @@ namespace Step_Test_Data
             InitializeComponent();
         }
 
+        public void updateList()
+        {
+            int a;
+            List<String> nameList = new List<String>();
+            for (a = 0; a < TestInAction.Count; a+=1)
+            {
+                nameList.Add(TestInAction[a].Name);
+            }
+            lst_current_Test.DataSource = nameList;
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             var showTestForms = new showForm();
@@ -28,6 +39,8 @@ namespace Step_Test_Data
         private void button2_Click(object sender, EventArgs e)
         {
             var DBM = new DBManager();
+            DBM.Add("Valentin", 2, 5);
+            DBM.Add("Leo", 2, 5);
             DBM.Add("Grosda", 2, 5);
         }
 
@@ -41,7 +54,20 @@ namespace Step_Test_Data
             var testData = new CurrentTest();
             TestInAction.Add(testData);
             var TestForm = new FormTest(testData);
+            updateList();
             TestForm.Show();
+        }
+
+        private void btn_open_current_Click(object sender, EventArgs e)
+        {
+            var testData = TestInAction[lst_current_Test.SelectedIndex];
+            var TestForm = new FormTest(testData);
+            TestForm.Show();
+        }
+
+        protected override void OnActivated(EventArgs e)
+        {
+            updateList();
         }
     }
 }

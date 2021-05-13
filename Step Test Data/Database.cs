@@ -55,9 +55,12 @@ namespace Step_Test_Data
         {
             using (var context = new DatabaseContext())
             {
+                Console.WriteLine(id);
+                Console.WriteLine(context.TestsHistory.Count());
                 var test = context.TestsHistory.Single(o => o.Id == id);
                 context.TestsHistory.Remove(test);
                 context.SaveChanges();
+                Console.WriteLine(context.TestsHistory.Count());
             }
         }
     }
