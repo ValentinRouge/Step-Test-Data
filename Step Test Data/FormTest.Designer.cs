@@ -148,16 +148,18 @@ namespace Step_Test_Data
             // 
             this.lbl_indication.AutoSize = true;
             this.lbl_indication.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
-            this.lbl_indication.Location = new System.Drawing.Point(433, 153);
+            this.lbl_indication.Location = new System.Drawing.Point(378, 153);
+            this.lbl_indication.MaximumSize = new System.Drawing.Size(400, 0);
             this.lbl_indication.Name = "lbl_indication";
-            this.lbl_indication.Size = new System.Drawing.Size(242, 29);
+            this.lbl_indication.Size = new System.Drawing.Size(394, 58);
             this.lbl_indication.TabIndex = 11;
-            this.lbl_indication.Text = "Lorem ipsum sit amet";
+            this.lbl_indication.Text = "Lorem ipsum sit amet Lorem ispum sir amet";
             // 
             // lbl_nxtresult
             // 
             this.lbl_nxtresult.AutoSize = true;
-            this.lbl_nxtresult.Location = new System.Drawing.Point(435, 203);
+            this.lbl_nxtresult.Location = new System.Drawing.Point(376, 238);
+            this.lbl_nxtresult.MaximumSize = new System.Drawing.Size(400, 0);
             this.lbl_nxtresult.Name = "lbl_nxtresult";
             this.lbl_nxtresult.Size = new System.Drawing.Size(156, 17);
             this.lbl_nxtresult.TabIndex = 12;
@@ -165,7 +167,7 @@ namespace Step_Test_Data
             // 
             // txt_result
             // 
-            this.txt_result.Location = new System.Drawing.Point(438, 243);
+            this.txt_result.Location = new System.Drawing.Point(379, 258);
             this.txt_result.Name = "txt_result";
             this.txt_result.Size = new System.Drawing.Size(100, 22);
             this.txt_result.TabIndex = 13;
@@ -192,7 +194,7 @@ namespace Step_Test_Data
             // 
             // btn_validate
             // 
-            this.btn_validate.Location = new System.Drawing.Point(545, 241);
+            this.btn_validate.Location = new System.Drawing.Point(486, 256);
             this.btn_validate.Name = "btn_validate";
             this.btn_validate.Size = new System.Drawing.Size(75, 23);
             this.btn_validate.TabIndex = 16;
@@ -204,7 +206,7 @@ namespace Step_Test_Data
             // 
             this.lbl_result_error.AutoSize = true;
             this.lbl_result_error.ForeColor = System.Drawing.Color.Red;
-            this.lbl_result_error.Location = new System.Drawing.Point(435, 268);
+            this.lbl_result_error.Location = new System.Drawing.Point(376, 283);
             this.lbl_result_error.Name = "lbl_result_error";
             this.lbl_result_error.Size = new System.Drawing.Size(152, 17);
             this.lbl_result_error.TabIndex = 17;

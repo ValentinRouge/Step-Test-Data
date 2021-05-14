@@ -17,8 +17,8 @@ namespace Step_Test_Data
         bool nameOK = false;
         bool sexOK = false;
         bool stepOK = false;
-        string text_results = "";
         Utils utils = new Utils();
+        MathUtils math = new MathUtils();
         private enum numberInLetter { first,second,third,fourth,fifth }
 
 
@@ -191,7 +191,7 @@ namespace Step_Test_Data
                     PopulateTextBox(Data.HR4, 3);
                     break;
                 case StepOfTheTest.finish:
-                    text_results += "Fourth HR mesured : " + Data.HR5.ToString();
+                    updateResultText("Fourth HR mesured : " + Data.HR5.ToString());
                     if (Data.HR5 < Data._50maxHR)
                     {
                          updateResultText("(This HR will not be taken into acount because it is to low) \n\n");
@@ -243,30 +243,25 @@ namespace Step_Test_Data
             lbl_nxtresult.Hide();
             btn_validate.Hide();
             int number_of_points = Data.takenHr.Count();
-            List<double> coeficient = new List<double>();
             if (number_of_points > 1)
             {
-                for (int i = 0; i < number_of_points; i++)
-                {
-                    for (int a = i + 1; a < number_of_points; a++)
-                    {
-                        coeficient.Add((Data.takenHr[a] - Data.takenHr[i]) / (Data.takenX[a] - Data.takenX[i]));
-                    }
-                }
-                double average_coefficient = utils.calcAverage(coeficient);
-                double averageX = utils.calcAverage(Data.takenX);
-                double averageY = utils.calcAverage(Data.takenHr);
-                double origin = averageY - averageX * average_coefficient;
-                double aerobic_capacity = (Data.maxHR - origin) / average_coefficient;
+                double aerobic_capacity = utils.getAerobicCapacity(Data);
                 lbl_indication.Text += "\n\nYour aerobic capacity is " + aerobic_capacity;
 
 
             } else if (number_of_points == 1)
             {
-                //CODER POUR PAS POSSIBLE
+                List<int> invalidTest = new List<int> { Data.HR1, Data.HR2, Data.HR3, Data.HR4, Data.HR5 }.ToList();
+                invalidTest.Remove(Data.takenHr[0]);
+                int clothest = math.getClosestFrom(invalidTest[0], invalidTest[1], invalidTest[2], invalidTest[3], Data._50maxHR, Data._85maxHR);
+                double aerobic_capacity = utils.getAerobicCapacity(Data, Data.takenHr[0], clothest, Data.takenX[0]);
+                lbl_indication.Text += "\n\nYour aerobic capacity is " + aerobic_capacity;
+                lbl_nxtresult.Show();
+                lbl_nxtresult.Text = $"You only had a valid value. Your score was calculated from the closest value in the valid value field: {clothest} bpm";
+
             } else 
             {
-                //COMMENT FAIRE AVEC QUE 1 PT ??
+                lbl_indication.Text += "\n\nThere are no valid points, so your test is invalid. \n\nTry again, perhaps with a different step height. ";
             }
 
         }
