@@ -42,9 +42,9 @@ namespace Step_Test_Data
         private void button2_Click(object sender, EventArgs e)
         {
             var DBM = new DBManager();
-            DBM.Add("Valentin", 2, 5);
-            DBM.Add("Leo", 2, 5);
-            DBM.Add("Grosda", 2, 5);
+            DBM.Add("Valentin", 52, Rating.Good);
+            DBM.Add("Leo", 46, Rating.Average);
+            DBM.Add("Grosda", 38, Rating.Excellent);
         }
 
         private void Form1_Load(object sender, EventArgs e)

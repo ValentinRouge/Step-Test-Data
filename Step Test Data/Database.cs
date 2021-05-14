@@ -33,14 +33,14 @@ namespace Step_Test_Data
             }
         }
 
-        public void Add(string Name, int Score, int? Age = null)
+        public void Add(string Name, int Score, Rating Fitness_Rating)
         {
 
             var newTest = new TestsHistory
             {
                 Name = Name,
-                Score = Score,
-                Age = Age,
+                Aerobic_Capacity = Score,
+                Fitness_Rating = Fitness_Rating,
                 Date = DateTime.Now
             };
 
@@ -98,10 +98,10 @@ namespace Step_Test_Data
         public string Name { get; set; }
 
         [Required]
-        public int Score { get; set; }
+        public int Aerobic_Capacity { get; set; }
+
+        public Rating Fitness_Rating { get; set; }
 
         public DateTime Date { get; set; }
-
-        public int? Age { get; set; }
     }
 }

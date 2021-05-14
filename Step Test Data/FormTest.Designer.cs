@@ -47,6 +47,7 @@ namespace Step_Test_Data
             this.lbl_step_error = new System.Windows.Forms.Label();
             this.btn_validate = new System.Windows.Forms.Button();
             this.lbl_result_error = new System.Windows.Forms.Label();
+            this.lbl_result_explains = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lbl_Name
@@ -158,7 +159,7 @@ namespace Step_Test_Data
             // lbl_nxtresult
             // 
             this.lbl_nxtresult.AutoSize = true;
-            this.lbl_nxtresult.Location = new System.Drawing.Point(376, 238);
+            this.lbl_nxtresult.Location = new System.Drawing.Point(380, 224);
             this.lbl_nxtresult.MaximumSize = new System.Drawing.Size(400, 0);
             this.lbl_nxtresult.Name = "lbl_nxtresult";
             this.lbl_nxtresult.Size = new System.Drawing.Size(156, 17);
@@ -167,7 +168,7 @@ namespace Step_Test_Data
             // 
             // txt_result
             // 
-            this.txt_result.Location = new System.Drawing.Point(379, 258);
+            this.txt_result.Location = new System.Drawing.Point(383, 244);
             this.txt_result.Name = "txt_result";
             this.txt_result.Size = new System.Drawing.Size(100, 22);
             this.txt_result.TabIndex = 13;
@@ -194,7 +195,7 @@ namespace Step_Test_Data
             // 
             // btn_validate
             // 
-            this.btn_validate.Location = new System.Drawing.Point(486, 256);
+            this.btn_validate.Location = new System.Drawing.Point(490, 242);
             this.btn_validate.Name = "btn_validate";
             this.btn_validate.Size = new System.Drawing.Size(75, 23);
             this.btn_validate.TabIndex = 16;
@@ -206,17 +207,28 @@ namespace Step_Test_Data
             // 
             this.lbl_result_error.AutoSize = true;
             this.lbl_result_error.ForeColor = System.Drawing.Color.Red;
-            this.lbl_result_error.Location = new System.Drawing.Point(376, 283);
+            this.lbl_result_error.Location = new System.Drawing.Point(380, 269);
             this.lbl_result_error.Name = "lbl_result_error";
             this.lbl_result_error.Size = new System.Drawing.Size(152, 17);
             this.lbl_result_error.TabIndex = 17;
             this.lbl_result_error.Text = "Type a correct number";
+            // 
+            // lbl_result_explains
+            // 
+            this.lbl_result_explains.AutoSize = true;
+            this.lbl_result_explains.Location = new System.Drawing.Point(383, 344);
+            this.lbl_result_explains.MaximumSize = new System.Drawing.Size(400, 0);
+            this.lbl_result_explains.Name = "lbl_result_explains";
+            this.lbl_result_explains.Size = new System.Drawing.Size(46, 17);
+            this.lbl_result_explains.TabIndex = 18;
+            this.lbl_result_explains.Text = "label1";
             // 
             // FormTest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.lbl_result_explains);
             this.Controls.Add(this.lbl_result_error);
             this.Controls.Add(this.btn_validate);
             this.Controls.Add(this.lbl_step_error);
@@ -261,5 +273,6 @@ namespace Step_Test_Data
         private System.Windows.Forms.Label lbl_step_error;
         private System.Windows.Forms.Button btn_validate;
         private System.Windows.Forms.Label lbl_result_error;
+        private System.Windows.Forms.Label lbl_result_explains;
     }
 }

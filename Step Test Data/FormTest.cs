@@ -69,6 +69,7 @@ namespace Step_Test_Data
             lbl_step_error.Hide();
             lbl_result_error.Hide();
             btn_validate.Hide();
+            lbl_result_explains.Hide();
             checkIfComplete();
         }
 
@@ -113,19 +114,38 @@ namespace Step_Test_Data
             result = Int32.TryParse(txt_Age.Text, out age);
             if (result)
             {
-                Data.Age = age;
-                ageOK = true;
-                lbl_age_error.Hide();
-                Data.maxHR = 220 - age;
-                Data._85maxHR = (double)Data.maxHR * (double)0.85;
-                Data._50maxHR = (double)Data.maxHR * (double)0.5;
-                var text = "Max HR  : " + Data.maxHR.ToString() + " b/min \n\n85% MaxHR : " + Data._85maxHR.ToString() + " b/min \n\n";
-                RelnitResultText(text);
-                checkIfComplete();
+                if (age >= 15 && age <= 65)
+                {
+                    Console.WriteLine("prb");
+                    Data.Age = age;
+                    ageOK = true;
+                    lbl_age_error.Hide();
+                    Data.maxHR = 220 - age;
+                    Data._85maxHR = (double)Data.maxHR * (double)0.85;
+                    Data._50maxHR = (double)Data.maxHR * (double)0.5;
+                    var text = "Max HR  : " + Data.maxHR.ToString() + " b/min \n\n85% MaxHR : " + Data._85maxHR.ToString() + " b/min \n\n";
+                    if (Data.stepOfTheTest == StepOfTheTest.init)
+                    {
+                        RelnitResultText(text);
+                    } else
+                    {
+                        updateResultText("");
+                    }
+                    checkIfComplete();
+                } else
+                {
+                    lbl_age_error.Show();
+                    lbl_age_error.Text = "The participant must be 15 and 65 years old.";
+                    ageOK = false;
+                }
+
             }
             else
             {
                 lbl_age_error.Show();
+                lbl_age_error.Text = "Type a correct age.";
+                ageOK = false;
+
             }
 
         }
@@ -238,6 +258,7 @@ namespace Step_Test_Data
 
         private void testIsFinished()
         {
+            Data.stepOfTheTest = StepOfTheTest.finish;
             lbl_indication.Text = "The test is finished";
             txt_result.Hide();
             lbl_nxtresult.Hide();
@@ -256,13 +277,13 @@ namespace Step_Test_Data
                 int clothest = math.getClosestFrom(invalidTest[0], invalidTest[1], invalidTest[2], invalidTest[3], Data._50maxHR, Data._85maxHR);
                 Data.aerobic_capacity = (int)utils.getAerobicCapacity(Data, Data.takenHr[0], clothest, Data.takenX[0]);
                 lbl_indication.Text += "\n\nYour aerobic capacity is " + Data.aerobic_capacity;
-                lbl_nxtresult.Show();
-                lbl_nxtresult.Text = $"You only had a valid value. Your score was calculated from the closest value in the valid value field: {clothest} bpm";
+                lbl_result_explains.Show();
+                lbl_result_explains.Text = $"You only had a valid value. Your score was calculated from the closest value in the valid value field: {clothest} bpm";
+                DisplayFitnessResult();
 
             } else 
             {
                 lbl_indication.Text += "\n\nThere are no valid points, so your test is invalid. \n\nTry again, perhaps with a different step height. ";
-                DisplayFitnessResult();
             }
         }
 
@@ -270,6 +291,8 @@ namespace Step_Test_Data
         {
             Data.FitnessResult = FitnessScoreDict.ComputeRatingFromScore(Data.aerobic_capacity, Data.Age, Data.isFemale);
             lbl_indication.Text += $"\n\nYou fitness rating is {Data.FitnessResult}";
+            DBManager DBM = new DBManager();
+            DBM.Add(Data.Name, Data.aerobic_capacity, Data.FitnessResult);
             
         }
 
@@ -311,6 +334,8 @@ namespace Step_Test_Data
                         break;
                 }
                 updateResults();
+                txt_result.Text = "";
+                txt_result.Focus();
             }
             else
             {
