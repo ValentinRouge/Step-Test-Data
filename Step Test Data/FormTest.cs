@@ -217,13 +217,13 @@ namespace Step_Test_Data
             if (hr < Data._50maxHR)
             {
 
-                updateResultText("(This HR will not be taken into acount because it is to low) \n\n");
+                updateResultText(" (This HR will not be taken into acount because it is to low) \n\n");
                 lbl_indication.Text = $"The participant do the {(numberInLetter)(number+1)} test";
                 lbl_nxtresult.Text = $"Result of the {(numberInLetter)(number + 1)} test (bpm) : ";
             }
             else if (hr > Data._85maxHR)
             {
-                updateResultText("(This HR will not be taken into acount because it is to high) \n\n");
+                updateResultText(" (This HR will not be taken into acount because it is to high) \n\n");
                 testIsFinished();
             }
             else
@@ -245,25 +245,32 @@ namespace Step_Test_Data
             int number_of_points = Data.takenHr.Count();
             if (number_of_points > 1)
             {
-                double aerobic_capacity = utils.getAerobicCapacity(Data);
-                lbl_indication.Text += "\n\nYour aerobic capacity is " + aerobic_capacity;
-
+                Data.aerobic_capacity = (int)utils.getAerobicCapacity(Data);
+                lbl_indication.Text += "\n\nYour aerobic capacity is " + Data.aerobic_capacity;
+                DisplayFitnessResult();
 
             } else if (number_of_points == 1)
             {
                 List<int> invalidTest = new List<int> { Data.HR1, Data.HR2, Data.HR3, Data.HR4, Data.HR5 }.ToList();
                 invalidTest.Remove(Data.takenHr[0]);
                 int clothest = math.getClosestFrom(invalidTest[0], invalidTest[1], invalidTest[2], invalidTest[3], Data._50maxHR, Data._85maxHR);
-                double aerobic_capacity = utils.getAerobicCapacity(Data, Data.takenHr[0], clothest, Data.takenX[0]);
-                lbl_indication.Text += "\n\nYour aerobic capacity is " + aerobic_capacity;
+                Data.aerobic_capacity = (int)utils.getAerobicCapacity(Data, Data.takenHr[0], clothest, Data.takenX[0]);
+                lbl_indication.Text += "\n\nYour aerobic capacity is " + Data.aerobic_capacity;
                 lbl_nxtresult.Show();
                 lbl_nxtresult.Text = $"You only had a valid value. Your score was calculated from the closest value in the valid value field: {clothest} bpm";
 
             } else 
             {
                 lbl_indication.Text += "\n\nThere are no valid points, so your test is invalid. \n\nTry again, perhaps with a different step height. ";
+                DisplayFitnessResult();
             }
+        }
 
+        private void DisplayFitnessResult()
+        {
+            Data.FitnessResult = FitnessScoreDict.ComputeRatingFromScore(Data.aerobic_capacity, Data.Age, Data.isFemale);
+            lbl_indication.Text += $"\n\nYou fitness rating is {Data.FitnessResult}";
+            
         }
 
         private void btn_validate_Click(object sender, EventArgs e)

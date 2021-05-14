@@ -25,7 +25,10 @@ namespace Step_Test_Data
             List<String> nameList = new List<String>();
             for (a = 0; a < TestInAction.Count; a+=1)
             {
-                nameList.Add(TestInAction[a].Name);
+                if (TestInAction[a].stepOfTheTest != StepOfTheTest.finish)
+                {
+                    nameList.Add(TestInAction[a].Name);
+                }
             }
             lst_current_Test.DataSource = nameList;
         }

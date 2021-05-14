@@ -158,6 +158,7 @@
     <Compile Include="showForm.Designer.cs">
       <DependentUpon>showForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="FitnessScoreDict.cs" />
     <Compile Include="Utils.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>

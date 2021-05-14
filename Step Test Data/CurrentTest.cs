@@ -27,6 +27,8 @@ namespace Step_Test_Data
         public string result_text { get; set; }
 
         public List<int> Xvalues = new List<int>();
+        public int aerobic_capacity { get; set; }
+        public Rating FitnessResult { get; set; }
 
     }
 
