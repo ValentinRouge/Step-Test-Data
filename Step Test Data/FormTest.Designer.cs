@@ -30,6 +30,9 @@ namespace Step_Test_Data
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormTest));
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.lbl_Name = new System.Windows.Forms.Label();
             this.txt_name = new System.Windows.Forms.TextBox();
             this.txt_Age = new System.Windows.Forms.TextBox();
@@ -48,6 +51,8 @@ namespace Step_Test_Data
             this.btn_validate = new System.Windows.Forms.Button();
             this.lbl_result_error = new System.Windows.Forms.Label();
             this.lbl_result_explains = new System.Windows.Forms.Label();
+            this.result_chart = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            ((System.ComponentModel.ISupportInitialize)(this.result_chart)).BeginInit();
             this.SuspendLayout();
             // 
             // lbl_Name
@@ -223,11 +228,28 @@ namespace Step_Test_Data
             this.lbl_result_explains.TabIndex = 18;
             this.lbl_result_explains.Text = "label1";
             // 
+            // result_chart
+            // 
+            chartArea1.Name = "ChartArea1";
+            this.result_chart.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.result_chart.Legends.Add(legend1);
+            this.result_chart.Location = new System.Drawing.Point(800, 27);
+            this.result_chart.Name = "result_chart";
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.result_chart.Series.Add(series1);
+            this.result_chart.Size = new System.Drawing.Size(612, 422);
+            this.result_chart.TabIndex = 19;
+            this.result_chart.Text = "chart1";
+            // 
             // FormTest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1455, 461);
+            this.Controls.Add(this.result_chart);
             this.Controls.Add(this.lbl_result_explains);
             this.Controls.Add(this.lbl_result_error);
             this.Controls.Add(this.btn_validate);
@@ -249,6 +271,7 @@ namespace Step_Test_Data
             this.Name = "FormTest";
             this.Text = "Test";
             this.Load += new System.EventHandler(this.FormTest_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.result_chart)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -274,5 +297,6 @@ namespace Step_Test_Data
         private System.Windows.Forms.Button btn_validate;
         private System.Windows.Forms.Label lbl_result_error;
         private System.Windows.Forms.Label lbl_result_explains;
+        private System.Windows.Forms.DataVisualization.Charting.Chart result_chart;
     }
 }

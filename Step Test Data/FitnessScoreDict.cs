@@ -16,15 +16,17 @@ namespace Step_Test_Data
                     Tuple<int, int> AGEtuple;
 
                     foreach (Tuple<int, int> tuple in maleTable.Keys)
+                    ///search if the value is in the corrects bounds
                     {
                         if (tuple.Item1 <= age && tuple.Item2 >= age)
                         {
                             AGEtuple = tuple;
                             foreach (Tuple<int, int> Stuple in maleTable[AGEtuple].Keys)
                             {
-                                if (Stuple.Item1 <= age && Stuple.Item2 >= age)
+                                if (Stuple.Item1 <= score && Stuple.Item2 >= score)
                                 {
                                     return maleTable[AGEtuple][Stuple];
+                                    //if it is in both bounds return a value
                                 }
                             }
                         }
@@ -41,7 +43,7 @@ namespace Step_Test_Data
                             AGEtuple = tuple;
                             foreach (Tuple<int, int> Stuple in femaleTable[AGEtuple].Keys)
                             {
-                                if (Stuple.Item1 <= age && Stuple.Item2 >= age)
+                                if (Stuple.Item1 <= score && Stuple.Item2 >= score)
                                 {
                                     return femaleTable[AGEtuple][Stuple];
                                 }
@@ -50,6 +52,7 @@ namespace Step_Test_Data
                     }
                 }
                 return Rating.Unknown;
+                ///if nothing is founds retunr unknown
             }
             catch
             {
@@ -60,6 +63,7 @@ namespace Step_Test_Data
 
         public static readonly Dictionary<Tuple<int, int>, Dictionary<Tuple<int, int>, Rating>> femaleTable = new Dictionary<Tuple<int, int>, Dictionary<Tuple<int, int>, Rating>>()
         {
+            ///dicts of all the possible values
             {
                 new Tuple<int,int>(15, 19), new Dictionary<Tuple<int,int>, Rating>()
                 {
@@ -379,6 +383,9 @@ namespace Step_Test_Data
 
     public enum Rating
     {
+        /// <summary>
+        /// All the possible Ratings
+        /// </summary>
         Excellent,
         Good,
         Average,

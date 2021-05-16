@@ -12,6 +12,7 @@ namespace Step_Test_Data
 
         public void updateXList(CurrentTest Data)
         {
+            /// retunr the list of X value associated with the step high
             switch (Data.TestStepHigh)
             {
                 case StepHigh._15:
@@ -30,6 +31,7 @@ namespace Step_Test_Data
         }
 
         public Double getAerobicCapacity(CurrentTest Data)
+            ///Calculate the aerobic capacity
         {
             int number_of_points = Data.takenHr.Count();
             List<double> coeficient = new List<double>();
@@ -38,29 +40,42 @@ namespace Step_Test_Data
                 for (int a = i + 1; a < number_of_points; a++)
                 {
                     coeficient.Add((Data.takenHr[a] - Data.takenHr[i]) / (Data.takenX[a] - Data.takenX[i]));
+                    ///calc all the coeficients bewteen all the points
                 }
             }
             double average_coefficient = mathUtils.calcAverage(coeficient);
+            ///calculate the average coefficient
             double averageX = mathUtils.calcAverage(Data.takenX);
+            ///Calculate the average H 
             double averageY = mathUtils.calcAverage(Data.takenHr);
+            ///Calculate the average HR
             double origin = averageY - averageX * average_coefficient;
+            ///calculate the origin (to have the equation of the right)
             return (Data.maxHR - origin) / average_coefficient;
+            /// return the aerobic capacity 
         }
         public Double getAerobicCapacity(CurrentTest Data, int valid, int invalid, int Xvalid )
+            ///get the aerobic capacity when only one data is valid
         {
             List<int> list = new List<int> { valid, invalid }.ToList();
+            ///Create a list with both HR values
             int max = list.Max();
             int min = list.Min();
-            int maxY = getY(Data, max);
-            int minY = getY(Data, min);
+            ///get the highest and lowest 
+            int maxX = getY(Data, max);
+            int minX = getY(Data, min);
+            //get the associated X value
 
-            double coeficient = (max - min) / (maxY - minY);
+            double coeficient = (max - min) / (maxX - minX);
+            ///Calculate the slope of the right
 
             double origin = valid - Xvalid * coeficient;
+            ///get the origin of the right to have the equation
             return (Data.maxHR - origin) / coeficient;
         }
 
         public int getY(CurrentTest Data, int X)
+            ///Search the Y value associates with one HR.
         {
             if (X == Data.HR1)
             {

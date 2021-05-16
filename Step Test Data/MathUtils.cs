@@ -9,6 +9,7 @@ namespace Step_Test_Data
     class MathUtils
     {
         public double calcAverage(List<double> list)
+        ///Calc a average value
         {
             int sum = 0;
             foreach (int val in list)
@@ -19,6 +20,7 @@ namespace Step_Test_Data
         }
 
         public double calcAverage(List<int> list)
+            ///Calc a average value
         {
             int sum = 0;
             foreach (int val in list)
@@ -43,6 +45,7 @@ namespace Step_Test_Data
                 }
             }
             return values[gap.IndexOf(gap.Min())];
+            //get the lowest value, get its index and return the value associated to this index
 
         }
     }
